@@ -53,15 +53,15 @@ router.post("/register", (req, res) => {
         .catch((err) => console.log(err));
 
       const userSchema = joi.object({
-        username: joi.string().required(),
-        email: joi.string().required(),
-        password: joi.string().required(),
+        username: joi.string().min(3).max(30).required(),
+        email: joi.string().email().min(5).max(100).required(),
+        password: joi.string().min(4).max(20).required(),
       });
 
       const { error } = userSchema.validate(body);
 
       if (error) {
-        console.log("error : ", error.message);
+        res.send(error.message);
       } else {
         const newUser = {
           username: body.username,
