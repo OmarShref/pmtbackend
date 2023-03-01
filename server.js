@@ -10,6 +10,9 @@ const passport = require("passport");
 // starting the app
 const app = express();
 
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
+
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,6 +27,7 @@ app.use(
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
+    cookie: { maxAge: oneDay },
   })
 );
 app.use(cookieParser("secretcode"));
@@ -42,8 +46,10 @@ mongoose
   .catch((err) => console.log(err));
 
 // set the routers
-const userRoute = require("./routes/userRouter");
-app.use("/", userRoute);
+const userRouter = require("./routes/userRouter");
+const recordsRouter = require("./routes/recordsRouter");
+app.use("/", userRouter);
+app.use("/user", recordsRouter);
 
 // listen to the port
 app.listen(port);
