@@ -57,11 +57,23 @@ router.put("/records", (req, res) => {
   }
 });
 
-router.put("/recorddelete", async (req, res) => {
+router.put("/recorddelete", (req, res) => {
   if (!req.user) {
     res.status(204).send();
   } else {
-    await Record.updateOne(
+    const deleteString = "records." + req.body.index;
+    Record.updateOne(
+      { _id: req.user.recordID },
+      { $unset: { [deleteString]: 1 } },
+      (err, data) => {
+        if (err) throw err;
+        if (!data) {
+          res.status(204).send();
+        } else {
+        }
+      }
+    );
+    Record.updateOne(
       { _id: req.user.recordID },
       { $pull: { records: null } },
       (err, data) => {
@@ -69,7 +81,7 @@ router.put("/recorddelete", async (req, res) => {
         if (!data) {
           res.status(204).send();
         } else {
-          res.status(200).send("record set to null");
+          res.status(200).send("deleted successfully");
         }
       }
     );
