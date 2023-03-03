@@ -4,7 +4,7 @@ const joi = require("joi");
 const Record = require("../models/Record");
 
 // GET
-router.get("/records", (req, res) => {
+router.get("/getall", (req, res) => {
   if (!req.user) {
     res.status(204).send();
   } else {
@@ -20,7 +20,7 @@ router.get("/records", (req, res) => {
 });
 
 // PUT
-router.put("/records", (req, res) => {
+router.put("/putone", (req, res) => {
   if (!req.user) {
     res.status(204).send();
   } else {
@@ -57,7 +57,7 @@ router.put("/records", (req, res) => {
   }
 });
 
-router.put("/recorddelete", (req, res) => {
+router.put("/deleteone", (req, res) => {
   if (!req.user) {
     res.status(204).send();
   } else {
@@ -70,18 +70,18 @@ router.put("/recorddelete", (req, res) => {
         if (!data) {
           res.status(204).send();
         } else {
-        }
-      }
-    );
-    Record.updateOne(
-      { _id: req.user.recordID },
-      { $pull: { records: null } },
-      (err, data) => {
-        if (err) throw err;
-        if (!data) {
-          res.status(204).send();
-        } else {
-          res.status(200).send("deleted successfully");
+          Record.updateOne(
+            { _id: req.user.recordID },
+            { $pull: { records: null } },
+            (err, data) => {
+              if (err) throw err;
+              if (!data) {
+                res.status(204).send();
+              } else {
+                res.status(200).send("deleted successfully");
+              }
+            }
+          );
         }
       }
     );

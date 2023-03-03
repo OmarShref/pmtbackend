@@ -49,7 +49,7 @@ mongoose
 const userRouter = require("./routes/userRouter");
 const recordsRouter = require("./routes/recordsRouter");
 app.use("/", userRouter);
-app.use("/user", recordsRouter);
+app.use("/records", recordsRouter);
 
 // listen to the port
 app.listen(port);
