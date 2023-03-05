@@ -28,7 +28,12 @@ router.put("/putone", (req, res) => {
     const schema = joi.object({
       date: joi.date().required(),
       money: joi.number().positive().max(1000000000000).required(),
-      type: joi.string().max(10).required(),
+      type: joi
+        .string()
+        .trim()
+        .max(10)
+        .valid("expenses", "income", "diaries")
+        .required(),
       description: joi.string().max(300).required(),
     });
     const { error } = schema.validate(body);

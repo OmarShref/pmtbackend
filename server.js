@@ -11,7 +11,7 @@ const passport = require("passport");
 const app = express();
 
 // creating 24 hours from milliseconds
-const oneDay = 1000 * 60 * 60 * 24;
+const oneMonth = 1000 * 60 * 60 * 24 * 30;
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
@@ -27,7 +27,7 @@ app.use(
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: oneDay },
+    cookie: { maxAge: oneMonth },
   })
 );
 app.use(cookieParser("secretcode"));
