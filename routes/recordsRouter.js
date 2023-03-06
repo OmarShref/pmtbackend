@@ -27,7 +27,7 @@ router.put("/putone", (req, res) => {
     const body = req.body;
     const schema = joi.object({
       date: joi.date().required(),
-      money: joi.number().positive().max(1000000000000).required(),
+      money: joi.number().positive().allow(0).max(1000000000000).required(),
       type: joi
         .string()
         .trim()
