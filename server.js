@@ -27,7 +27,7 @@ app.use(
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: oneMonth },
+    cookie: { maxAge: oneMonth, sameSite: "none", secure: "auto" },
   })
 );
 app.use(cookieParser("secretcode"));
