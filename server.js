@@ -28,6 +28,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     cookie: {
+      sameSite: "lax",
       maxAge: oneMonth,
     },
   })
