@@ -25,10 +25,11 @@ app.use(
 app.use(
   session({
     secret: "secretcode",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     cookie: {
       sameSite: "lax",
+      secure: false,
       maxAge: oneMonth,
     },
   })
