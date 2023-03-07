@@ -12,6 +12,7 @@ router.get("/user", (req, res) => {
   if (!req.user) {
     res.status(204).send();
   } else {
+    response.set("X-Content-Type-Options", "nosniff");
     res.status(200).send(req.user);
   }
 });
