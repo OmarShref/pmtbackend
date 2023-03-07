@@ -29,7 +29,6 @@ app.use(
     saveUninitialized: false,
     cookie: {
       sameSite: "lax",
-      secure: false,
       maxAge: oneMonth,
     },
   })
