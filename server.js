@@ -29,7 +29,8 @@ app.use(
     saveUninitialized: true,
     cookie: {
       sameSite: "none",
-      secure: "true",
+      secure: "auto",
+      httpOnly: false,
       maxAge: oneMonth,
     },
   })
